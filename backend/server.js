@@ -24,6 +24,14 @@ const exerciseRouter = require('./routes/exercises.js');
 app.use('/exercises', exerciseRouter);
 app.use('/users', userRouter);
 
+const path = require('path');
+
+app.use(express.static('mern-exercise-tracker/build'));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+});
+
 app.listen(port, () => {
     console.log(`app is running on port ${port}`)
 })
