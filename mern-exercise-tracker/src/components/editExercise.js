@@ -23,7 +23,7 @@ export default class EditExercise extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:5000/exercises' + this.props.match.params.id)
+        axios.get('http://localhost:5000/exercises/' + this.props.match.params.id)
             .then(res => {
                 this.setState({
                     username: res.data.username,
@@ -72,7 +72,7 @@ export default class EditExercise extends Component {
 
         console.log(exercise);
 
-        axios.post('http://localhost:5000/exercises/add', exercise)
+        axios.post('http://localhost:5000/exercises/update' + this.props.match.params.id, exercise)
             .then(res => console.log(res.data))
 
         window.location = '/';
@@ -81,7 +81,7 @@ export default class EditExercise extends Component {
     render() {
         return (
             <div>
-                <h3>Create New Exercise Log</h3>
+                <h3>Edit Exercise Log</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label>Username: </label>
@@ -109,7 +109,7 @@ export default class EditExercise extends Component {
                     </div>
 
                     <div className="form-group">
-                        <input type="submit" value="Create Exercise Log" className="btn btn-primary" />
+                        <input type="submit" value="Edit Exercise Log" className="btn btn-primary" />
                     </div>
                 </form>
             </div>
